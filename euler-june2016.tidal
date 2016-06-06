@@ -90,8 +90,11 @@ msil [d'bass, d'tac]
 d'drum $ overlay (s "k") $ cf $
   every 2 (density 3) $ s "~ psr:1"
 
-d'fly $ 0.25 ~> fly'2
+-- questioning this part right up to breaking to piston v.
+-- it's ok but not that interesting
+
 d'cymb $ (1 ~>) $ cymb'2 "0.6"
+d'fly $ 0.25 ~> fly'2
 
 d'tac $ cf $ b1'tac
 
