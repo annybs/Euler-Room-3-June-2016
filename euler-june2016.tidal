@@ -2,12 +2,14 @@
 anny: euler room june 2016 live performance
 setlist:
   - battery 1 (alt)
-  - piston v/vi
+  - piston v
+  - piston vi
   - battery 2 (edit)
   - raise/piston v
   - juliese
   - something to say (version)
-  - piston vii/viii
+  - piston iv
+  - piston viii
 -}
 
 let bpm b = cps (b/60)
@@ -90,48 +92,48 @@ msil [d'bass, d'tac]
 d'drum $ overlay (s "k") $ cf $
   every 2 (density 3) $ s "~ psr:1"
 
--- questioning this part right up to breaking to piston v.
--- it's ok but not that interesting
-
 d'cymb $ (1 ~>) $ cymb'2 "0.6"
-d'fly $ 0.25 ~> fly'2
-
-d'tac $ cf $ b1'tac
-
-d'bass $ bass'5
+d'shard $ 0.5 <~ shard'2
 
 d'drum $ overlay k $ cf $
   every' 8 8 (density 1.5) $
   every 2 (density 3) $ s "~ psr:1"
 
-d'shard $ ((5%16) <~) $ shard'2
+d'fly $ fly'2
+
+d'tac $ cf $ b1'tac
 
 d'perc $ cf $
   slow 2 . spread slow [2,4,2,3] $
   jux (0.25 <~) $ b1'perc
   # n (density 3 $ run 2)
 
-msil [d'cymb, d'hand, d'fly, d'bass]
+d'tac $ cf . whenmod 7 4 (density 1.5) $ b1'tac
 
+-- quickly
 d'drum $ cf $
-  every' 8 8 (density 1.5) $ every 2 (density 3) $ s "~ psr:1"
+  every' 8 8 (density 1.5) $
+  every 2 (density 3) $ s "~ psr:1"
+
+msil [d'cymb, d'hand, d'fly, d'bass]
 
 {-
 piston v
-@todo work on this transition
 -}
 
+d'tac silence
 d'drum silence
-d'bass silence
 
-msil [d'tac, d'shard]
 d'drum $ drum'5
 
+bpm 130
+bpm 133
+bpm 136
 bpm 138
 
 d'perc $ perc'5
 d'ant $ ant'2
-msil [d'warb, d'ant, d'fly]
+msil [d'warb, d'ant, d'fly, d'shard]
 
 d'drum $ overlay k $ drum'5
 
@@ -296,8 +298,6 @@ d'ql $ slow (10%4) $ spread density [1,5%4] $
 
 let pn'hh = s "[phh*8 [phh*4 ho]]/2"
 
-msil [d'drum, d'perc]
-
 d'drum $ cf $ pn'hh
 
 bpm 120
@@ -411,7 +411,6 @@ bpm 111
 bpm 105
 
 msil [d'arpy, d'bass]
-
 d'drum $ s "k"
 
 msil [d'perc, d'ql]
@@ -422,8 +421,8 @@ d'bass $ bassbass'
 d'perc $ hhb False
 d'casio silence
 d'drum $ morek $ s "k"
-d'bass2 silence
 d'perc $ whenmod 16 15 (density 3) $ hhb False
+d'bass2 silence
 
 d'drum $ overlay ((0.5 ~>) $ s "rsn/2") $ morek $ s "k"
 d'bass $ whenmod 3 2 (slow 2) $ bassbass'
@@ -671,64 +670,57 @@ d'voc $ cf $
   # speed ((+0.5).(*1.2) <$> slow 5 sinewave1)
 
 {-
-piston vii
-@todo work on this transition
+piston iv
+@todo work on transition
 -}
 
-msil [d'voc, d'moog]
-d'drum $ whenmod 3 2 (slow (4%3)) $ sound "[k*2 [sn ~ ~ wt] k*2 sn [~ k]]/5"
-solo $ d'drum $ whenmod 3 2 (slow (4%3)) $ sound "[k*2 [sn ~ ~ wt] k*2 sn [~ k]]/5"
+msil [d'gt, d'voc, d'perc, d'moog]
 
+d'perc $ drum5'4
+d'shard $ plox'4 "[ice plode]*2"
+
+bpm 110
+bpm 120
+bpm 130
+msil [d'bass, d'kurt, d'drum]
 bpm 138
 
-d'drum $ every 3 (density 2) $ within (0, 0.5) (jux ((1%3) ~>)) $ sound "[k [sn ~ k] [~ ~ sn] ~]/8"
+-- we're back
+d'drum $ s "[k sn k*2 [~ sn] [~ k]]/5"
+d'perc $ smash 4 [0.5,0.25] $ iter 3 $ drum5'4
 
-d'shard $ shard'7 "0.02"
+d'bz $ bz'4
 
--- quickly
-hush
-d'drum $ sound "[k [sn ~ k] [~ ~ sn] ~]/8"
+d'misc silence
+d'shard $ whenmod 7 3 (density (5%4)) $ plox'4 "[ice plode]*2"
+d'drum $ s "[[k k:1]*2 sn k*2 [~ sn] [~ k]]/5"
+d'bass $ (0.75 ~>) $ bass'4
 
-d'perc $ sound "[wt*3 ~]/2"
-  |=| shape ((/2) <$> slow 3 saw1)
+-- o yes
+msil [d'perc,d'bz,d'shard]
+d'bz $ bzox'4 "bz"
+d'drum $ s "[k*2 sn [~ k] sn]/4"
+d'bz $ bzox'4 "bz*2"
+d'shard $ whenmod 7 3 (density (5%4)) $ plox'4 "[ice wtsn]*2" # vowel "u e"
+d'bz $ every 3 brak $ bzox'4 "bz*2"
 
-d'bass $ bass'7 id
+d'perc $ smash 4 [0.5,0.25] $ iter 3 $ drum5'4
+d'drum silence
+d'drum $ s "[[k ~ ~ k] sn [~ k] sn]/4"
 
+d'bz $ every 3 brak $ bzox'4 "bz bzl"
+
+msil [d'perc,d'bass,d'shard, d'bz]
+
+-- borrowed from p7
 d'fly $ fly'7
-
-d'fly $ fly'7
-  |=| delay "0.6"
-  |=| delayfeedback "0.4"
-  |=| delaytime "0.62" --(112/60)/3
-
-d'bz $ rev . chop 12 $ sound "bz/4"
-  |=| vowel "o"
-
-msil [d'drum,d'perc]
-
-d'bass $
-  (|=| begin (bass'7'm id)) $
-  (|=| end (bass'7'm (+0.05))) $
-  bass'7 id
-
-d'shard $ shard'7 "0.02"
-
-d'drum $ sound "{[k k]/2, ~ sn}"
-d'drum $ sound "{[[k ~ k] k]/2, ~ sn}"
-
-d'shard $ shard'7 "0.76"
-
-msil [d'bass,d'shard]
-
-d'bass $ bass'7 (within (0.33, 0.67) (0.25 ~>))
-  |=| vowel "o"
-
-d'bass silence
-d'drum $ within (0, 0.5) (jux ((1%3) ~>)) $ sound "[k [sn ~ k] [~ ~ sn] ~]/8"
-d'bz silence
+  # delay "0.6"
+  # delayfeedback "0.4"
+  # delaytime "0.62" --(112/60)/3
 
 {-
 piston viii
+@todo work on transition
 -}
 
 let bz'8 = sound (samples "[[ff bz]*2 [~ bz*2]]/2" $ slow 2 $ run 5)
@@ -740,10 +732,8 @@ let bz'8 = sound (samples "[[ff bz]*2 [~ bz*2]]/2" $ slow 2 $ run 5)
 
 -- go
 d'bass $ slow 16 $ bass' 32
-d'drum $ within (0, 0.5) (superimpose ((1%3) ~>)) $ sound "[k [sn ~ k] [~ ~ sn] ~]/8"
 d'bz $ bz'8 |=| gain "0.8"
 
-d'drum $ sound "[k*2 [sn ~ ~ wt] [~ k] sn [~ k]]/5"
 d'drum $ sound "[k [sn ~ ~ wt] [~ k] sn]/4"
 
 d'bass $ slow 16 $ bass' 64
