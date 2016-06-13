@@ -1,7 +1,7 @@
 {-
 anny: euler room june 2016 live performance
 setlist:
-  - battery 1 (alt)
+  - battery 1
   - piston v
   - piston vi
   - battery 2 (edit)
@@ -16,7 +16,7 @@ let bpm b = cps (b/60)
 bpm 125
 
 {-
-battery 1 (alt)
+battery 1
 -}
 
 d'bass $ slow 4 $ b1'bass
@@ -89,9 +89,6 @@ d'perc $ cf $
 msil [d'bass, d'tac]
 
 d'cymb $ (1 ~>) $ cymb'2 "0.6"
-d'shard $ (9%16) <~ shard'2 # gain "0.6"
-
-d'fly $ fly'2
 
 d'drum $ overlay (s "k") $ cf $
   every 2 (density 3) $ s "~ psr:1"
@@ -100,13 +97,12 @@ d'drum $ overlay k $ cf $
   every' 8 8 (density 1.5) $
   every 2 (density 3) $ s "~ psr:1"
 
-d'tac $ cf $ b1'tac
-d'tac $ cf . whenmod 7 4 (density 1.5) $ b1'tac
-
 d'perc $ cf $
   slow 2 . spread slow [2,4,2,3] $
   jux (0.25 <~) $ b1'perc
   # n (density 3 $ run 2)
+
+d'shard $ (9%16) <~ shard'2 # gain "0.6"
 
 -- quickly
 d'drum $ cf $
@@ -119,7 +115,6 @@ msil [d'cymb, d'hand, d'fly, d'bass]
 piston v
 -}
 
-d'tac silence
 d'drum silence
 
 d'drum $ drum'5
@@ -692,8 +687,8 @@ bpm 138
 
 d'bass $ slow 16 $ bass' 32
 d'bz $ bz'8 |=| gain "0.8"
-d'drum $ s "[k*2 [sn ~ ~ wt] [~ k] sn [~ k]]/5"
 d'misc silence
+d'drum $ s "[k*2 [sn ~ ~ wt] [~ k] sn [~ k]]/5"
 
 let bz'8 = sound (samples "[[ff bz]*2 [~ bz*2]]/2" $ slow 2 $ run 5)
            |=| begin "0.7"
