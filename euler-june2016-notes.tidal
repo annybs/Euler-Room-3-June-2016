@@ -352,9 +352,9 @@ d'shard $ bass'5f
 d'perc $ sound "{wt/2, [~ wtsn]/8}"
 d'cymb $ cymb'6f
 
-d'perc $ overlay fly'1f $ -- 2nd last
-  within (0.5, 1) (slow (3%2) . chop 4) $ -- last
-  whenmod 5 3 (rev . chop 8) $ -- only rev 1st
+d'perc $ overlay fly'1f $ -- 3
+  within (0.5, 1) (slow (3%2) . chop 4) $ -- 4
+  whenmod 5 3 (rev . chop 8) $ -- 1&2 - first time w/o chop
   snare43'1
 
 msil [d'fly,d'bz,d'shard,d'misc,d'ant,d'cymb]
